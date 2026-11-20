@@ -1,0 +1,13 @@
+node_modules/
+dist/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+build/
+.pytest-tmp/
+.venv/
+dist-py/
+deploy/keys/
+deploy/.env
+.vscode/
+.idea/

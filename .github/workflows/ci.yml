@@ -1,0 +1,126 @@
+name: ci
+
+# Tests and builds the FRANSCOR SDKs. Never publishes: releasing to PyPI/npm
+# is a separate, manually approved workflow (not created yet).
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: franscor-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: python ${{ matrix.python }} · ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e "packages/sdk-python[test]" langchain-core langgraph
+      - name: Test
+        working-directory: packages/sdk-python
+        run: python -m pytest -q
+
+  typescript:
+    name: node ${{ matrix.node }} · ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: ["22", "24"]
+    defaults:
+      run:
+        working-directory: packages/sdk-typescript
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm test
+
+  interop:
+    name: python ↔ typescript · ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build TypeScript SDK
+        working-directory: packages/sdk-typescript
+        run: |
+          npm ci
+          npm run build
+      - name: Install Python SDK
+        run: python -m pip install -e "packages/sdk-python[test]"
+      - name: Acceptance test
+        run: python -m pytest -q tests/interop
+
+  federation-docker:
+    name: two federated hubs in Docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install SDK (for key provisioning and the smoke client)
+        run: python -m pip install -e packages/sdk-python
+      - name: Provision hub keys
+        run: |
+          python deploy/init_federation.py
+          sudo chown -R 10001:10001 deploy/keys
+      - name: Start federation
+        run: docker compose -f deploy/docker-compose.federation.yml --env-file deploy/.env up -d --build --wait
+      - name: Smoke test across hubs
+        run: python deploy/smoke.py ws://127.0.0.1:7701 ws://127.0.0.1:7702
+      - name: Logs
+        if: always()
+        run: docker compose -f deploy/docker-compose.federation.yml --env-file deploy/.env logs --no-color
+
+  package:
+    runs-on: ubuntu-latest
+    needs: [python, typescript, interop]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build wheel and sdist
+        run: |
+          python -m pip install build twine
+          python -m build packages/sdk-python --outdir dist-py
+          python -m twine check dist-py/*
+      - name: Pack npm tarball (dry run)
+        working-directory: packages/sdk-typescript
+        run: |
+          npm ci
+          npm run build
+          npm pack --dry-run

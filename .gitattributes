@@ -1,0 +1,4 @@
+# Same bytes on every platform: test vectors, signatures and PEM files depend on it.
+* text=auto eol=lf
+*.png binary
+*.jpg binary

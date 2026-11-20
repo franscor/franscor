@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.2/audit-bundle.json",
+  "title": "FSP 0.2 audit export bundle",
+  "type": "object",
+  "required": [
+    "fsp",
+    "type",
+    "hub_id",
+    "hub_public_key",
+    "checkpoint",
+    "cosignatures",
+    "entries"
+  ],
+  "properties": {
+    "fsp": {
+      "const": "0.2"
+    },
+    "type": {
+      "const": "audit-bundle"
+    },
+    "hub_id": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "hub_public_key": {
+      "type": "string",
+      "pattern": "^-----BEGIN PUBLIC KEY-----"
+    },
+    "checkpoint": {
+      "$ref": "audit-checkpoint.json"
+    },
+    "cosignatures": {
+      "type": "array",
+      "items": {
+        "$ref": "audit-cosignature.json"
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "index",
+          "leaf"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "leaf": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "proofs": {
+      "type": "object",
+      "description": "index -> inclusion proof (hex hashes); absent for a full export",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "consistency": {
+      "type": "object",
+      "required": [
+        "from_size",
+        "proof"
+      ],
+      "properties": {
+        "from_size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "from_checkpoint": {
+          "oneOf": [
+            {
+              "$ref": "audit-checkpoint.json"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "proof": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  }
+}

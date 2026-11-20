@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.1/statements.json",
+  "title": "FSP 0.1 identity statements",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fsp",
+        "type",
+        "old_agent_id",
+        "old_public_key",
+        "new_agent_id",
+        "new_public_key",
+        "ts",
+        "sigs"
+      ],
+      "properties": {
+        "fsp": {
+          "const": "0.1"
+        },
+        "type": {
+          "const": "key-rotation"
+        },
+        "old_agent_id": {
+          "type": "string",
+          "pattern": "^fsp:[0-9a-f]{32}$"
+        },
+        "old_public_key": {
+          "type": "string"
+        },
+        "new_agent_id": {
+          "type": "string",
+          "pattern": "^fsp:[0-9a-f]{32}$"
+        },
+        "new_public_key": {
+          "type": "string"
+        },
+        "ts": {
+          "type": "integer"
+        },
+        "sigs": {
+          "type": "object",
+          "required": [
+            "old",
+            "new"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "old": {
+              "type": "string"
+            },
+            "new": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fsp",
+        "type",
+        "agent_id",
+        "public_key",
+        "reason",
+        "ts",
+        "sig"
+      ],
+      "properties": {
+        "fsp": {
+          "const": "0.1"
+        },
+        "type": {
+          "const": "key-revocation"
+        },
+        "agent_id": {
+          "type": "string",
+          "pattern": "^fsp:[0-9a-f]{32}$"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "ts": {
+          "type": "integer"
+        },
+        "sig": {
+          "type": "string"
+        }
+      }
+    }
+  ]
+}

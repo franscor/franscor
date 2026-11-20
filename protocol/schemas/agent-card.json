@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.1/agent-card.json",
+  "title": "FSP 0.1 agent card",
+  "type": "object",
+  "required": [
+    "agent_id",
+    "name",
+    "org",
+    "public_key",
+    "capabilities",
+    "visibility",
+    "accepts",
+    "runtime",
+    "card_sig"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "agent_id": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9._-]{1,64}$"
+    },
+    "org": {
+      "type": "string",
+      "pattern": "^[a-z0-9._-]{1,64}$"
+    },
+    "public_key": {
+      "type": "string",
+      "pattern": "^-----BEGIN PUBLIC KEY-----\n"
+    },
+    "capabilities": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "risk"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "risk": {
+            "enum": [
+              "R0",
+              "R1",
+              "R2",
+              "R3",
+              "R4",
+              "R5"
+            ]
+          },
+          "input_schema": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "visibility": {
+      "enum": [
+        "private",
+        "org",
+        "public"
+      ]
+    },
+    "accepts": {
+      "type": "object",
+      "required": [
+        "orgs",
+        "agents"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "orgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "agents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": [
+        "language",
+        "version",
+        "sdk"
+      ],
+      "properties": {
+        "language": {
+          "enum": [
+            "python",
+            "typescript",
+            "javascript",
+            "other"
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "sdk": {
+          "type": "string"
+        },
+        "adapters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "enc_key": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$"
+    },
+    "card_sig": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    }
+  }
+}

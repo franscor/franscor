@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.2/peering.json",
+  "title": "FSP 0.2 peering file",
+  "description": "A hub's contract with its partner hubs. With one, federated traffic is default-deny.",
+  "type": "object",
+  "required": [
+    "type",
+    "peers"
+  ],
+  "properties": {
+    "fsp": {
+      "const": "0.2"
+    },
+    "type": {
+      "const": "peering"
+    },
+    "peers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "hub_id",
+          "rules"
+        ],
+        "properties": {
+          "hub_id": {
+            "type": "string",
+            "pattern": "^fsp:[0-9a-f]{32}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "capabilities"
+              ],
+              "properties": {
+                "orgs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true,
+                  "maxItems": 256,
+                  "default": [
+                    "*"
+                  ]
+                },
+                "agents": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true,
+                  "maxItems": 256,
+                  "default": [
+                    "*"
+                  ]
+                },
+                "capabilities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true,
+                  "maxItems": 256,
+                  "minItems": 1
+                },
+                "scopes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true,
+                  "maxItems": 256
+                },
+                "messages": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "rate_per_min": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "default": 60
+                },
+                "max_depth": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "default": 0
+                },
+                "ttl": {
+                  "oneOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^[0-9.]+[smhd]?$"
+                    }
+                  ],
+                  "default": "1h",
+                  "description": "seconds, or 30m / 1h / 1d; a permit never outlives its passport"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "revoked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "permit_id"
+        ],
+        "properties": {
+          "permit_id": {
+            "type": "string",
+            "pattern": "^pm_[0-9a-f]{32}$"
+          },
+          "agent_id": {
+            "type": "string",
+            "pattern": "^fsp:[0-9a-f]{32}$"
+          },
+          "peer_hub_id": {
+            "type": "string",
+            "pattern": "^fsp:[0-9a-f]{32}$"
+          },
+          "revoked_at": {
+            "type": "integer"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

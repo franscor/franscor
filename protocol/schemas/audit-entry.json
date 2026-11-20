@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.2/audit-entry.json",
+  "title": "FSP 0.2 audit entry (black box leaf)",
+  "description": "Stored and hashed as its exact canonical JSON text. Metadata only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fsp",
+    "type",
+    "index",
+    "ts",
+    "route",
+    "frame",
+    "decision",
+    "payload_hash"
+  ],
+  "properties": {
+    "fsp": {
+      "const": "0.2"
+    },
+    "type": {
+      "const": "audit-entry"
+    },
+    "index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ts": {
+      "type": "integer"
+    },
+    "route": {
+      "enum": [
+        "local",
+        "inbound",
+        "outbound"
+      ]
+    },
+    "frame": {
+      "enum": [
+        "task.request",
+        "task.result",
+        "task.cancel",
+        "message"
+      ]
+    },
+    "envelope_id": {
+      "type": "string"
+    },
+    "from": {
+      "type": "string"
+    },
+    "to": {
+      "type": "string"
+    },
+    "peer_hub_id": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "passport_id": {
+      "type": "string"
+    },
+    "permit_id": {
+      "type": "string"
+    },
+    "payload_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "decision": {
+      "enum": [
+        "allowed",
+        "blocked",
+        "masked",
+        "unreachable"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^FSP-[0-9]{4}$"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.2/audit-cosignature.json",
+  "title": "FSP 0.2 audit cosignature",
+  "description": "A peer hub's signature over a checkpoint it checked for consistency.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fsp",
+    "type",
+    "witness_id",
+    "witness_public_key",
+    "hub_id",
+    "tree_size",
+    "root",
+    "checkpoint_ts",
+    "ts",
+    "sig"
+  ],
+  "properties": {
+    "fsp": {
+      "const": "0.2"
+    },
+    "type": {
+      "const": "audit-cosignature"
+    },
+    "witness_id": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "witness_public_key": {
+      "type": "string",
+      "pattern": "^-----BEGIN PUBLIC KEY-----"
+    },
+    "hub_id": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "tree_size": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "root": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "checkpoint_ts": {
+      "type": "integer"
+    },
+    "ts": {
+      "type": "integer"
+    },
+    "sig": {
+      "type": "string"
+    }
+  }
+}

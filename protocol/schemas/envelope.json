@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.1/envelope.json",
+  "title": "FSP 0.1 envelope",
+  "type": "object",
+  "required": [
+    "fsp",
+    "id",
+    "type",
+    "from",
+    "ts",
+    "body",
+    "sig"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "fsp": {
+      "const": "0.1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 64
+    },
+    "type": {
+      "enum": [
+        "challenge",
+        "register",
+        "welcome",
+        "discover",
+        "discover.result",
+        "deliver",
+        "routed",
+        "message",
+        "task.request",
+        "task.result",
+        "task.cancel",
+        "error",
+        "identity.rotate",
+        "identity.revoke",
+        "identity.ack",
+        "peer.hello",
+        "peer.sync",
+        "peer.update",
+        "peer.revoked",
+        "peer.relay",
+        "peer.status",
+        "passport.trust",
+        "passport.renew",
+        "passport.issued",
+        "peer.crl",
+        "peer.witnessed",
+        "peer.checkpoint",
+        "peer.cosign"
+      ]
+    },
+    "from": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "to": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "ts": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "corr": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "body": {
+      "type": "object"
+    },
+    "sig": {
+      "type": "object",
+      "required": [
+        "alg",
+        "kid",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "alg": {
+          "const": "Ed25519"
+        },
+        "kid": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        }
+      }
+    }
+  }
+}

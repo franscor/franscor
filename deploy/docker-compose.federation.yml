@@ -1,0 +1,21 @@
+# Two federated hubs (e.g. two regions or two organizations).
+#   python deploy/init_federation.py        # creates deploy/keys/{eu,us} and deploy/.env
+#   docker compose -f deploy/docker-compose.federation.yml --env-file deploy/.env up -d --build
+# Ports are bound to 127.0.0.1: put a TLS proxy in front before exposing them.
+services:
+  hub-eu:
+    build: { context: .., dockerfile: deploy/Dockerfile }
+    image: franscor-hub:local
+    command: ["--allow-peer", "${HUB_US_ID}"]
+    volumes: ["./keys/eu:/data"]
+    ports: ["127.0.0.1:7701:7700"]
+    restart: unless-stopped
+
+  hub-us:
+    build: { context: .., dockerfile: deploy/Dockerfile }
+    image: franscor-hub:local
+    depends_on: [hub-eu]
+    command: ["--allow-peer", "${HUB_EU_ID}", "--peer", "ws://hub-eu:7700"]
+    volumes: ["./keys/us:/data"]
+    ports: ["127.0.0.1:7702:7700"]
+    restart: unless-stopped

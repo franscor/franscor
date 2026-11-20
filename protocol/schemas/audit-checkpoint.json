@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.2/audit-checkpoint.json",
+  "title": "FSP 0.2 audit checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fsp",
+    "type",
+    "hub_id",
+    "hub_public_key",
+    "tree_size",
+    "root",
+    "ts",
+    "sig"
+  ],
+  "properties": {
+    "fsp": {
+      "const": "0.2"
+    },
+    "type": {
+      "const": "audit-checkpoint"
+    },
+    "hub_id": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "hub_public_key": {
+      "type": "string",
+      "pattern": "^-----BEGIN PUBLIC KEY-----"
+    },
+    "tree_size": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "root": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "ts": {
+      "type": "integer"
+    },
+    "sig": {
+      "type": "string"
+    }
+  }
+}

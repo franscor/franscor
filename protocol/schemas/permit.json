@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.2/permit.json",
+  "title": "FSP 0.2 permit",
+  "description": "Signed by the receiving hub of a federation link; bound to the requester's passport.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fsp",
+    "type",
+    "permit_id",
+    "hub_id",
+    "hub_public_key",
+    "peer_hub_id",
+    "agent_id",
+    "passport_id",
+    "org",
+    "capabilities",
+    "scopes",
+    "messages",
+    "rate_per_min",
+    "max_depth",
+    "issued_at",
+    "expires_at",
+    "sig"
+  ],
+  "properties": {
+    "fsp": {
+      "const": "0.2"
+    },
+    "type": {
+      "const": "permit"
+    },
+    "permit_id": {
+      "type": "string",
+      "pattern": "^pm_[0-9a-f]{32}$"
+    },
+    "hub_id": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "hub_public_key": {
+      "type": "string",
+      "pattern": "^-----BEGIN PUBLIC KEY-----"
+    },
+    "peer_hub_id": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "agent_id": {
+      "type": "string",
+      "pattern": "^fsp:[0-9a-f]{32}$"
+    },
+    "passport_id": {
+      "type": "string",
+      "pattern": "^pp_[0-9a-f]{32}$"
+    },
+    "org": {
+      "type": "string",
+      "pattern": "^[a-z0-9._-]{1,64}$"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "maxItems": 256,
+      "description": "exact names, '*' or 'family.*'"
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "maxItems": 256
+    },
+    "messages": {
+      "type": "boolean"
+    },
+    "rate_per_min": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_depth": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "issued_at": {
+      "type": "integer"
+    },
+    "expires_at": {
+      "type": "integer"
+    },
+    "sig": {
+      "type": "string"
+    }
+  }
+}

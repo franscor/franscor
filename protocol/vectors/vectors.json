@@ -1,0 +1,346 @@
+{
+  "fsp": "0.1",
+  "seed_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "identity": {
+    "agent_id": "fsp:56475aa75463474c0285df5dbf2bcab7",
+    "kid": "f0ff50dacf109dea",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAA6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=\n-----END PUBLIC KEY-----\n"
+  },
+  "canonical": [
+    {
+      "value": {
+        "b": 1,
+        "a": [
+          true,
+          false,
+          null
+        ],
+        "é": "ü",
+        "A": {
+          "z": 0,
+          "y": -1
+        }
+      },
+      "json": "{\"A\":{\"y\":-1,\"z\":0},\"a\":[true,false,null],\"b\":1,\"é\":\"ü\"}",
+      "sha256": "08af451d475420d1d464a8865b8667e84138ceef6fb34edc9d0351858f77b1dc"
+    },
+    {
+      "value": {
+        "floats": [
+          0.1,
+          1.5,
+          2.0,
+          -1e-06,
+          1e-07,
+          1.5e-10,
+          9007199254740991.0,
+          123456789.125,
+          5e-324
+        ]
+      },
+      "json": "{\"floats\":[0.1,1.5,2,-0.000001,1e-7,1.5e-10,9007199254740991,123456789.125,5e-324]}",
+      "sha256": "d5523b681f562e36dc737ba770511173c390c74869dca51946c0ad470557edef"
+    },
+    {
+      "value": {
+        "text": "line\nbreak \"quoted\" \t tab \u001f ctrl 😀 emoji"
+      },
+      "json": "{\"text\":\"line\\nbreak \\\"quoted\\\" \\t tab \\u001f ctrl 😀 emoji\"}",
+      "sha256": "d1e925d57b746f6bdff864f33a621779ad0a1fb8269503fabdbd3bcfdcb415ba"
+    },
+    {
+      "value": [],
+      "json": "[]",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "value": "plain",
+      "json": "\"plain\"",
+      "sha256": "945603a8f587786b463c3f94fce115c0fae88fac2728cc96ddf5981cf7f61741"
+    }
+  ],
+  "envelope": {
+    "value": {
+      "fsp": "0.1",
+      "id": "00000000-0000-4000-8000-000000000001",
+      "type": "task.request",
+      "from": "fsp:56475aa75463474c0285df5dbf2bcab7",
+      "ts": 1763290000000,
+      "body": {
+        "task_id": "task-0001",
+        "capability": "math.add",
+        "input": {
+          "a": 2,
+          "b": 0.5
+        },
+        "deadline_ms": 30000
+      },
+      "to": "fsp:00000000000000000000000000000000",
+      "sig": {
+        "alg": "Ed25519",
+        "kid": "f0ff50dacf109dea",
+        "value": "tOpDqquVmYWVQOQ88B1h_qJp1MGXyA9U2ozS4kHnB-jE7NDRrL6Zvr889hp2N62Z05S_K2fcMm-G3Iwenu73AA"
+      }
+    },
+    "digest": "e15fa245cff2cbcdfdf000ee1c8ca7c49e3b3b072006f556df92c3fd62fd1dd4"
+  },
+  "evidence": {
+    "version": "0.1",
+    "action_id": "00000000-0000-4000-8000-000000000002",
+    "timestamp": 1763290000123,
+    "agent_id": "fsp:56475aa75463474c0285df5dbf2bcab7",
+    "organization_id": "acme",
+    "action": {
+      "method": "TASK",
+      "target": "fsp://math.add",
+      "type": "fsp.task",
+      "payload_hash": "ac1e8c34ed7cae22c41f581b5a290f255d6c4448428b04ad0fdacb349b8b3503"
+    },
+    "risk": {
+      "level": "R2",
+      "label": "R2",
+      "value": 2
+    },
+    "authorization": {
+      "policy": "franscor-agent",
+      "rule": "accepted",
+      "decision": "allow"
+    },
+    "execution": {
+      "status": "executed",
+      "task_id": "task-0001",
+      "requester": "fsp:00000000000000000000000000000000",
+      "response_hash": "bc32b3e1725d5371b190b13b7ec4af83469ee03fd3da083d8890c22751e82efe"
+    },
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "evidence": {
+      "hash": "76ce70923c0e7dfcdf4d18209d239cc33a69153c4f53feaafa6451bda9d40e88",
+      "algorithm": "Ed25519",
+      "signature": "StAhMHSsmeFSQg5cUtjkIK8yge8qBtiTOZHc4nto5qgnV9_ceyweHwkbEEJJI13bGvwiy6klj-ioZTScy7frAA",
+      "issuer": "acme",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAA6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=\n-----END PUBLIC KEY-----\n",
+      "key_fingerprint": "f0ff50dacf109dea"
+    }
+  },
+  "rotation": {
+    "fsp": "0.1",
+    "type": "key-rotation",
+    "old_agent_id": "fsp:56475aa75463474c0285df5dbf2bcab7",
+    "old_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAA6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=\n-----END PUBLIC KEY-----\n",
+    "new_agent_id": "fsp:24f6ed6acbfe1009c030d7ca567c33ca",
+    "new_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAKay64UG8yvCyLhqU000LxzYeUm0L/hLIl5S8kyKWbdc=\n-----END PUBLIC KEY-----\n",
+    "ts": 1763290000456,
+    "sigs": {
+      "old": "PxQo4_-2baBkcp2p4C6abxrnLbIDek4RDJnqWX1rUQ6SvCglvRdjBQoFbPLhjbWVLBiOXYNwaGzIN28d8gzCCw",
+      "new": "jynenBGGw3x41qupuQAwyL0v-mznJ6jfuJfvv0nuUhbF1slz2XZ9Vgi9Dka3l45HaYyEFjMaMpYXQrh78Bu3DA"
+    }
+  },
+  "revocation": {
+    "fsp": "0.1",
+    "type": "key-revocation",
+    "agent_id": "fsp:56475aa75463474c0285df5dbf2bcab7",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAA6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=\n-----END PUBLIC KEY-----\n",
+    "reason": "key compromised",
+    "ts": 1763290000789,
+    "sig": "wcJ2SNGw9uVQB1JqrdBxl8f3iyE4pv6kp-UlKImjOc2EmWCChbJq2aarDSmBrXGlsCKXxIGLwv59fzGguMrODg"
+  },
+  "enc_key": "iXLBS305nYfNuls1QW7xnmeoo4OaxEwUAgwC1btqvTU",
+  "sealed": {
+    "data": {
+      "a": 2,
+      "b": 0.5,
+      "note": "é"
+    },
+    "aad": {
+      "type": "task.request",
+      "from": "fsp:56475aa75463474c0285df5dbf2bcab7",
+      "to": "fsp:00000000000000000000000000000000",
+      "ref": "task-0001"
+    },
+    "ephemeral_seed_hex": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+    "nonce_hex": "000102030405060708090a0b",
+    "value": {
+      "alg": "X25519-HKDF-SHA256-A256GCM",
+      "epk": "eaYx7t4b-cmPEgMs3q3Q56B5OY_HhriMyEbsia-FpRo",
+      "nonce": "AAECAwQFBgcICQoL",
+      "ct": "9iBcIT2clwsH8zkfZQIntm7QQYPqBXbIApicYEpr_MeOjC8ujesryeR35Q"
+    }
+  },
+  "card": {
+    "agent_id": "fsp:56475aa75463474c0285df5dbf2bcab7",
+    "name": "vector",
+    "org": "acme",
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAA6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=\n-----END PUBLIC KEY-----\n",
+    "enc_key": "iXLBS305nYfNuls1QW7xnmeoo4OaxEwUAgwC1btqvTU",
+    "capabilities": [
+      {
+        "name": "math.add",
+        "description": "add",
+        "risk": "R1"
+      }
+    ],
+    "visibility": "org",
+    "accepts": {
+      "orgs": [
+        "acme"
+      ],
+      "agents": []
+    },
+    "runtime": {
+      "language": "python",
+      "version": "3",
+      "sdk": "franscor-python/0.1.0"
+    },
+    "card_sig": "zLAOMKKjTzAE-XjWCCSgK1dstYCAfIe-LlBJHbCNRw4nclVRReP2ck9d7hzNJuGD24j0vZLALZrl95NOPn_aBw"
+  },
+  "passport": {
+    "fsp": "0.2",
+    "type": "passport",
+    "passport_id": "pp_abababababababababababababababab",
+    "hub_id": "fsp:24f6ed6acbfe1009c030d7ca567c33ca",
+    "hub_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAKay64UG8yvCyLhqU000LxzYeUm0L/hLIl5S8kyKWbdc=\n-----END PUBLIC KEY-----\n",
+    "agent_id": "fsp:56475aa75463474c0285df5dbf2bcab7",
+    "org": "acme",
+    "agent_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAA6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=\n-----END PUBLIC KEY-----\n",
+    "capabilities": [
+      "math.add",
+      "text.upper"
+    ],
+    "issued_at": 1763290000000,
+    "expires_at": 1763293600000,
+    "sig": "ETYXfW4SkIWxI6nKxwspBZ2TW8_MoLk1hliZq8XazyZFk-6litnrpjxQ9EjMIztBLbms6-BRxD0NN9LRIiKgAQ"
+  },
+  "passport_crl": {
+    "fsp": "0.2",
+    "type": "passport-crl",
+    "hub_id": "fsp:24f6ed6acbfe1009c030d7ca567c33ca",
+    "serial": 2,
+    "issued_at": 1763290200000,
+    "revoked": [
+      {
+        "passport_id": "pp_abababababababababababababababab",
+        "agent_id": "fsp:56475aa75463474c0285df5dbf2bcab7",
+        "revoked_at": 1763290100000,
+        "reason": "key compromised",
+        "ban": true
+      }
+    ],
+    "sig": "-LzUaYCqWZ-IbTCCMljbDDRpVvSzJ1CcOqxDtijgG-35BbKxwlyLFApEojg9i7gxDnj-RCrm-ZIABbc3oMMPBQ"
+  },
+  "permit": {
+    "fsp": "0.2",
+    "type": "permit",
+    "permit_id": "pm_cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+    "hub_id": "fsp:519cae93e93ad011d785355894405ed8",
+    "hub_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAzRSzf5VulTGU/3+3Oz2B3MVh1hp1OAlLfD4aZD7l86o=\n-----END PUBLIC KEY-----\n",
+    "peer_hub_id": "fsp:24f6ed6acbfe1009c030d7ca567c33ca",
+    "agent_id": "fsp:56475aa75463474c0285df5dbf2bcab7",
+    "passport_id": "pp_abababababababababababababababab",
+    "org": "acme",
+    "capabilities": [
+      "fx.*",
+      "invoice.total"
+    ],
+    "scopes": [
+      "invoices:read"
+    ],
+    "messages": false,
+    "rate_per_min": 60,
+    "max_depth": 1,
+    "issued_at": 1763290000500,
+    "expires_at": 1763291800500,
+    "sig": "dguFTNclsxr8LDTL0yFxzu_Hp3o19iolZ1UTa5xRgfRiUtaOsfulH2P86YkUd6ksqj8EK1rRI86oQkGNvRbkBw"
+  },
+  "audit": {
+    "checkpoint_3": {
+      "fsp": "0.2",
+      "type": "audit-checkpoint",
+      "hub_id": "fsp:519cae93e93ad011d785355894405ed8",
+      "hub_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAzRSzf5VulTGU/3+3Oz2B3MVh1hp1OAlLfD4aZD7l86o=\n-----END PUBLIC KEY-----\n",
+      "tree_size": 3,
+      "root": "20bd10b6d00f3b437406369d2618d9d5ee541cd54d3b2c9a98062735f81d0f3f",
+      "ts": 1763290002000,
+      "sig": "B9KpC92QUMY7sJcI6556X_VejNN8_Vk154SjhUiicpagj36wxVyDIdOuG3Ckxm2PIGs87lKN2GPI8iM2GrvmBg"
+    },
+    "bundle": {
+      "fsp": "0.2",
+      "type": "audit-bundle",
+      "hub_id": "fsp:519cae93e93ad011d785355894405ed8",
+      "hub_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAzRSzf5VulTGU/3+3Oz2B3MVh1hp1OAlLfD4aZD7l86o=\n-----END PUBLIC KEY-----\n",
+      "checkpoint": {
+        "fsp": "0.2",
+        "type": "audit-checkpoint",
+        "hub_id": "fsp:519cae93e93ad011d785355894405ed8",
+        "hub_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAzRSzf5VulTGU/3+3Oz2B3MVh1hp1OAlLfD4aZD7l86o=\n-----END PUBLIC KEY-----\n",
+        "tree_size": 5,
+        "root": "5e32dc59b2dab7063ee783f11069ef9c299438cffb932e05f16ea32252ad2619",
+        "ts": 1763290003000,
+        "sig": "1UTeEu0IyDPrFNPiuBwoItY1TGPCdOSVVb5PU-72BHgHJf2XjrqdLWFlj9z1SrDMPioXikOYkuDrDA2dplKlAw"
+      },
+      "cosignatures": [
+        {
+          "fsp": "0.2",
+          "type": "audit-cosignature",
+          "witness_id": "fsp:24f6ed6acbfe1009c030d7ca567c33ca",
+          "witness_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAKay64UG8yvCyLhqU000LxzYeUm0L/hLIl5S8kyKWbdc=\n-----END PUBLIC KEY-----\n",
+          "hub_id": "fsp:519cae93e93ad011d785355894405ed8",
+          "tree_size": 5,
+          "root": "5e32dc59b2dab7063ee783f11069ef9c299438cffb932e05f16ea32252ad2619",
+          "checkpoint_ts": 1763290003000,
+          "ts": 1763290003500,
+          "sig": "8pddn1QIqtkiihUKOOl0hLtiAJUD9o7jyxBbEWSgrCXt7rahtV_KjnIwbYrnTo4mzbrLvMWLpaFbrLZ044KPAQ"
+        }
+      ],
+      "entries": [
+        {
+          "index": 1,
+          "leaf": "{\"code\":\"FSP-1201\",\"decision\":\"blocked\",\"envelope_id\":\"env-0001\",\"frame\":\"task.request\",\"from\":\"fsp:56475aa75463474c0285df5dbf2bcab7\",\"fsp\":\"0.2\",\"index\":1,\"payload_hash\":\"0b549edd218c251f511934cc2f3bc5c7f4780e27af6b8ab4ae8d92cd94121b4a\",\"route\":\"inbound\",\"to\":\"fsp:00000000000000000000000000000000\",\"ts\":1763290001001,\"type\":\"audit-entry\"}"
+        },
+        {
+          "index": 2,
+          "leaf": "{\"decision\":\"masked\",\"envelope_id\":\"env-0002\",\"frame\":\"task.request\",\"from\":\"fsp:56475aa75463474c0285df5dbf2bcab7\",\"fsp\":\"0.2\",\"index\":2,\"payload_hash\":\"38f38fbef725fffb9fa39683d9e50f05ca8c61130c2da2322f9e9021007a2abf\",\"route\":\"inbound\",\"to\":\"fsp:00000000000000000000000000000000\",\"ts\":1763290001002,\"type\":\"audit-entry\"}"
+        },
+        {
+          "index": 3,
+          "leaf": "{\"decision\":\"unreachable\",\"envelope_id\":\"env-0003\",\"frame\":\"task.request\",\"from\":\"fsp:56475aa75463474c0285df5dbf2bcab7\",\"fsp\":\"0.2\",\"index\":3,\"payload_hash\":\"6867a9ad5ed5490cad237e5a82ff1c3f3a6858a7ec42be49b40b12a65911dcd7\",\"route\":\"inbound\",\"to\":\"fsp:00000000000000000000000000000000\",\"ts\":1763290001003,\"type\":\"audit-entry\"}"
+        }
+      ],
+      "proofs": {
+        "1": [
+          "229f9bae574d804c9b2fbd112da75cfd2d5d2f174ec1ceb8cd91cd12e9e7806a",
+          "2069d7c024ff41e5919c035caf0d499b111c3218b1446cd756390cb6f3857aa8",
+          "168c15b7a3c8ddc299c2f20a124edcabf16d1d9c157648acf02d07c27a770376"
+        ],
+        "2": [
+          "a6913528449d114c4926b1b01d326c08a95cb6a8ff9199707f7ffe5ae3c90616",
+          "d6fb6528c2f99428e1bfdd4e325ebe9b7244a8c47a36526d547659b48259514e",
+          "168c15b7a3c8ddc299c2f20a124edcabf16d1d9c157648acf02d07c27a770376"
+        ],
+        "3": [
+          "6f8446d7bfafd5438de180dd7643357aedf078551d1090a6941ecb83b8a1045f",
+          "d6fb6528c2f99428e1bfdd4e325ebe9b7244a8c47a36526d547659b48259514e",
+          "168c15b7a3c8ddc299c2f20a124edcabf16d1d9c157648acf02d07c27a770376"
+        ]
+      },
+      "consistency": {
+        "from_size": 3,
+        "from_checkpoint": {
+          "fsp": "0.2",
+          "type": "audit-checkpoint",
+          "hub_id": "fsp:519cae93e93ad011d785355894405ed8",
+          "hub_public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAzRSzf5VulTGU/3+3Oz2B3MVh1hp1OAlLfD4aZD7l86o=\n-----END PUBLIC KEY-----\n",
+          "tree_size": 3,
+          "root": "20bd10b6d00f3b437406369d2618d9d5ee541cd54d3b2c9a98062735f81d0f3f",
+          "ts": 1763290002000,
+          "sig": "B9KpC92QUMY7sJcI6556X_VejNN8_Vk154SjhUiicpagj36wxVyDIdOuG3Ckxm2PIGs87lKN2GPI8iM2GrvmBg"
+        },
+        "proof": [
+          "6f8446d7bfafd5438de180dd7643357aedf078551d1090a6941ecb83b8a1045f",
+          "a6913528449d114c4926b1b01d326c08a95cb6a8ff9199707f7ffe5ae3c90616",
+          "d6fb6528c2f99428e1bfdd4e325ebe9b7244a8c47a36526d547659b48259514e",
+          "168c15b7a3c8ddc299c2f20a124edcabf16d1d9c157648acf02d07c27a770376"
+        ]
+      }
+    }
+  }
+}

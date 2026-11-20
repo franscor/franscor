@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://franscor.dev/fsp/0.1/task.json",
+  "title": "FSP 0.1 task bodies",
+  "$defs": {
+    "request": {
+      "type": "object",
+      "required": [
+        "task_id",
+        "capability",
+        "deadline_ms"
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 64
+        },
+        "capability": {
+          "type": "string"
+        },
+        "input": {},
+        "deadline_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600000
+        },
+        "trace": {
+          "type": "object",
+          "maxProperties": 4,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sealed": {
+          "$ref": "#/$defs/sealed"
+        },
+        "passport": {
+          "$ref": "passport.json"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 256,
+          "description": "FSP 0.2: data scopes the task needs, bounded by a permit across federation links"
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 64,
+          "description": "FSP 0.2: delegation depth (0 = not delegated from another task), reported by the SDK"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "input"
+          ]
+        },
+        {
+          "required": [
+            "sealed"
+          ]
+        }
+      ]
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "task_id",
+        "status"
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "failed",
+            "rejected",
+            "approval_rejected",
+            "timeout",
+            "cancelled"
+          ]
+        },
+        "output": {},
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "pattern": "^FSP-[0-9]{4}$"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "evidence_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sealed": {
+          "$ref": "#/$defs/sealed"
+        }
+      }
+    },
+    "sealed": {
+      "type": "object",
+      "required": [
+        "alg",
+        "epk",
+        "nonce",
+        "ct"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "alg": {
+          "const": "X25519-HKDF-SHA256-A256GCM"
+        },
+        "epk": {
+          "type": "string"
+        },
+        "nonce": {
+          "type": "string"
+        },
+        "ct": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
