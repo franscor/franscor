@@ -23,7 +23,7 @@
     }
   },
   "bin": {
-    "franscor": "./dist/cli.js"
+    "franscor": "dist/cli.js"
   },
   "files": [
     "dist",
