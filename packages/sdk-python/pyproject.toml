@@ -41,6 +41,9 @@ franscor = "franscor.cli:main"
 [project.urls]
 Homepage = "https://franscor.com"
 Documentation = "https://franscor.com/sdk"
+Repository = "https://github.com/franscor/franscor"
+Issues = "https://github.com/franscor/franscor/issues"
+Changelog = "https://github.com/franscor/franscor/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 include = ["franscor*"]

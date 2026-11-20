@@ -5,6 +5,14 @@
   "license": "Apache-2.0",
   "author": "Lamstra Labs",
   "homepage": "https://franscor.com/sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franscor/franscor.git",
+    "directory": "packages/sdk-typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/franscor/franscor/issues"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

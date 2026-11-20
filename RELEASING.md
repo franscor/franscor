@@ -18,9 +18,6 @@ cd packages\sdk-typescript; npm.cmd test; cd ..\..
 ```
 
 - [ ] The CI workflow (`.github/workflows/ci.yml`) is green on the commit to release.
-- [ ] Repository links are set once the public repository is chosen:
-      `[project.urls] Repository` in `pyproject.toml`, `repository` in `package.json`,
-      and relative links in the three README files (they do not work on PyPI or npm).
 
 ## 2. Python (PyPI)
 

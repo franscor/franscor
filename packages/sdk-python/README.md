@@ -9,7 +9,7 @@ stays as it is.
 
 > Status: **0.2.0, alpha, not yet published** on PyPI or npm. Not externally audited yet:
 > evaluate it before relying on it in production. See
-> [ARCHITECTURE.md](ARCHITECTURE.md) for what is implemented and what is planned.
+> [ARCHITECTURE.md](https://github.com/franscor/franscor/blob/main/ARCHITECTURE.md) for what is implemented and what is planned.
 
 ## Install (after publication)
 
