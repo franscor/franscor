@@ -4,9 +4,9 @@ Python package `franscor` (PyPI) and Node.js package `franscor` (npm) share one 
 number. Format: [Keep a Changelog](https://keepachangelog.com/); versions follow
 [Semantic Versioning](https://semver.org/) — before 1.0, a minor version may break the API.
 
-## 0.2.0 — unreleased (prepared 2026-11-20)
+## 0.2.0 — 2026-11-20
 
-First public release. Alpha: not externally audited yet.
+First public release, on PyPI (`pip install franscor`) and npm (`npm install franscor`). Alpha: not externally audited yet.
 
 ### Core (FSP 0.1)
 - Self-certifying Ed25519 agent identities (`fsp:` IDs), signed envelopes, canonical JSON
